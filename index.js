@@ -1,3 +1,4 @@
+const utils = require('util');
 const https = require('https');
 const fs = require('fs');
 const express = require('express');
@@ -122,7 +123,7 @@ function GetStatsFromId(res){
             Kill = stats["lifetimeStats"]["kills"];
         }
 
-        SendReturn = KDToString(StatsType, Wins, WinsRate, Kda, Match, Kill); //KD to string
+        SendReturn = TypeToString(StatsType, Wins, WinsRate, Kda, Match, Kill);
 
         res.send(SendReturn); //Return data
     }).catch(err => {
@@ -150,9 +151,9 @@ function TypeToString(mode, wins, winsrate, kda, match, kill){
     }
 
     if(mode.includes("kd")){
-        TypeReturn = "@"+TwitchUsername + " -> " + StatsUsername + " has a " + kda + " K/D and wins " + winsrate + "% " + TimeSt + " ("+GroupSt+")";
+        TypeReturn = utils.format("@%s -> %s has a %s K/D and wins %s% %s (%s)", TwitchUsername, StatsUsername, kda, winsrate, TimeSt, GroupSt);
     }else{
-        TypeReturn = "@"+TwitchUsername + " -> " + StatsUsername + " has a " + winsrate + "% winrate with " + wins + " TOP 1 " + TimeSt + " ("+GroupSt+")";
+        TypeReturn = utils.format("@%s -> %s has a %s% winrate with %s TOP 1 %s (%s)", TwitchUsername, StatsUsername, winsrate, wins, TimeSt, GroupSt);
     }
 
     return TypeReturn;
