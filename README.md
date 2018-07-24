@@ -18,3 +18,17 @@ How to get these headers ?
 *   When the game tell you : "Connecting" or "Update" in waiting screen, **Press F12 to reactivate requests capture**
 *   You will see again a request with /account/api/oauth/token. Click on it and click after that on Inspectors get the header (Authorization header content and remove basic) => **This header is your Fortnite Client Token**
 *   Stop Capture
+
+## NIGHTBOT EXAMPLE COMMANDS
+
+ `!commands add !winsall -cd=15 -ul=everyone $(urlfetch https://your_domain_name/api/fortnite?username=Tekzification.Tv&type=top&group=lifetime&time=weekly&plaftform=pc&twitchn=$(touser)&q=$(query))`
+ 
+---
+
+###URL PARAMETERS :
+- username = String
+- q = String
+- type = String (kd, top)
+- group = String (lifetime, solo, duo, squad)
+- time = String (weekly, alltime)
+- platform = String (pc, ps4, xb1)
