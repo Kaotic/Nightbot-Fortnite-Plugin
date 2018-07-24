@@ -34,7 +34,7 @@ var StatsPlatform = DefaultStatsPlatform; //pc ps4 xb1
 var TwitchUsername = DefaultTwitchUsername; //default twitch username
 var SendReturn = "";
 
-app.use(require('helmet')()); //Sécurisation avec le HSTS pour le SSL.
+app.use(require('helmet')()); //Secure SSL with HTLS
 
 app.get('/', function (req, res) {
     res.send('A Nightbot Fortnite API</a> by <a href="https://kaotic.fr">Kaotic</a>');
@@ -183,5 +183,5 @@ function TOPToString(wins, winsrate, kda, match, kill){
 }
 
 https.createServer(options, app).listen(8698, function () {
-    console.log('Application lancée sur le port 8698 !');
+    console.log('App launched and listen on 8698 !');
 });
