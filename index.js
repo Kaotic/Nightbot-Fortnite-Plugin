@@ -88,7 +88,7 @@ app.get('/api/fortnite', function (req, res) {
                 GetStatsFromId(res);
             }).catch(err => {
                 console.log(err);
-                SendReturn = "Une erreur c'est produite.";
+                SendReturn = "Error with API !";
                 res.send(SendReturn);
             });
         }else{
@@ -122,64 +122,40 @@ function GetStatsFromId(res){
             Kill = stats["lifetimeStats"]["kills"];
         }
 
-        if(StatsType.includes("kd")){
-            SendReturn = KDToString(Wins, WinsRate, Kda, Match, Kill); //KD to string
-        }else if(StatsType.includes("top")){
-            SendReturn = TOPToString(Wins, WinsRate, Kda, Match, Kill); //TOP to string
-        }else{
-            SendReturn = KDToString(Wins, WinsRate, Kda, Match, Kill); //KD to string
-        }
+        SendReturn = KDToString(StatsType, Wins, WinsRate, Kda, Match, Kill); //KD to string
 
         res.send(SendReturn); //Return data
     }).catch(err => {
         console.log(err);
-        SendReturn = "Une erreur c'est produite.";
+        SendReturn = "Error with API !";
         res.send(SendReturn);
     });
 }
 
-function KDToString(wins, winsrate, kda, match, kill){
-    let KdSt = "";
+function TypeToString(mode, wins, winsrate, kda, match, kill){
+    let TypeReturn = "";
     let TimeSt = "";
     let GroupSt = "";
 
     if(StatsTime.includes("alltime")){
-        TimeSt = "sur toutes les saisons.";
+        TimeSt = "in all seasons.";
     }else{
-        TimeSt = "sur cette saison.";
+        TimeSt = "on this season.";
     }
 
     if(StatsGroup.includes("solo") || StatsGroup.includes("duo") || StatsGroup.includes("squad")){
         GroupSt = StatsGroup.charAt(0).toUpperCase() + StatsGroup.slice(1);
     }else{
-        GroupSt = "Tous les modes";
+        GroupSt = "All mods";
     }
 
-    KdSt = "@"+TwitchUsername + " -> " + StatsUsername + " a " + kda + " de KD et gagne a " + winsrate + "% " + TimeSt + " ("+GroupSt+")";
-
-    return KdSt;
-}
-
-function TOPToString(wins, winsrate, kda, match, kill){
-    let TopSt = "";
-    let TimeSt = "";
-    let GroupSt = "";
-
-    if(StatsTime.includes("alltime")){
-        TimeSt = "sur toutes les saisons.";
+    if(mode.includes("kd")){
+        TypeReturn = "@"+TwitchUsername + " -> " + StatsUsername + " has a " + kda + " K/D and wins " + winsrate + "% " + TimeSt + " ("+GroupSt+")";
     }else{
-        TimeSt = "sur cette saison.";
+        TypeReturn = "@"+TwitchUsername + " -> " + StatsUsername + " has a " + winsrate + "% winrate with " + wins + " TOP 1 " + TimeSt + " ("+GroupSt+")";
     }
 
-    if(StatsGroup.includes("solo") || StatsGroup.includes("duo") || StatsGroup.includes("squad")){
-        GroupSt = StatsGroup.charAt(0).toUpperCase() + StatsGroup.slice(1);
-    }else{
-        GroupSt = "Tous les modes";
-    }
-
-    TopSt = "@"+TwitchUsername + " -> " + StatsUsername + " gagne a " + winsrate + "% avec " + wins + " TOP 1 " + TimeSt + " ("+GroupSt+")";
-
-    return TopSt;
+    return TypeReturn;
 }
 
 https.createServer(options, app).listen(8698, function () {
