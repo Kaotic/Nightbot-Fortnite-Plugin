@@ -1,0 +1,16 @@
+{
+  "name": "Nightbot-Fortnite-Plugin",
+  "version": "1.0.0",
+  "description": "Nightbot command plugin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Axel Kaotic",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "fortnite-api": "^2.12.2",
+    "helmet": "^3.13.0"
+  }
+}
