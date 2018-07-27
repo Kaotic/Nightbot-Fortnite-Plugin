@@ -74,7 +74,8 @@ app.get('/api/fortnite', function (req, res) {
 
     //Check if have get requests
     if(req.query.username){ StatsUsername = req.query.username; } //If get username
-    if(req.query.q){ StatsUsername = req.query.q; } //If get twitch username
+    if(req.query.q){ StatsUsername = req.query.q; } //If get username
+    if(req.query.twitchn){ TwitchUsername = req.query.twitchn; } //If get twitch username
     if(req.query.type) if(req.query.type.includes("kd")){ StatsType = "kd"; }else if(req.query.type.includes("top")){ StatsType = "top"; } //If get type
     if(req.query.group) if(req.query.group.includes("solo") || req.query.group.includes("duo") || req.query.group.includes("squad") || req.query.group.includes("lifetime")){ StatsGroup = req.query.group; } //If get group
     if(req.query.time) if(req.query.time.includes("weekly") || req.query.time.includes("alltime")) { StatsTime = req.query.time; } //If get time
