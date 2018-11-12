@@ -1,12 +1,12 @@
-const utils = require('util');
-const https = require('https');
-const fs = require('fs');
-const express = require('express');
-const Fortnite = require("fortnite-api");
-const app = express();
-const options = {  //LET'S ENCRYPT SSL
-    cert: fs.readFileSync('/etc/letsencrypt/live/your_domain_name/fullchain.pem'),
-    key: fs.readFileSync('/etc/letsencrypt/live/your_domain_name/privkey.pem')
+const utils = require('util'),
+      https = require('https'),
+      fs = require('fs'),
+      express = require('express'),
+      Fortnite = require("fortnite-api"),
+      app = express(),
+      options = {  //LET'S ENCRYPT SSL
+        cert: fs.readFileSync('/etc/letsencrypt/live/your_domain_name/fullchain.pem'),
+        key: fs.readFileSync('/etc/letsencrypt/live/your_domain_name/privkey.pem')
 };
 
 let fortniteAPI = new Fortnite([
@@ -18,22 +18,22 @@ let fortniteAPI = new Fortnite([
     debug: true
 });
 
-var DefaultStatsUsername = "Tekzification.Tv"; //default username
-var DefaultStatsUserId = "86986ea429a1449da69b900c5bf4e633"; //default userid
-var DefaultStatsType = "kd"; //kd top
-var DefaultStatsGroup = "squad"; //solo duo squad
-var DefaultStatsTime = "weekly"; //weekly alltime
-var DefaultStatsPlatform = "pc"; //pc ps4 xb1
-var DefaultTwitchUsername = "TheKaotic13"; //default twitch username
+var DefaultStatsUsername = "Tekzification.Tv", //default username
+    DefaultStatsUserId = "86986ea429a1449da69b900c5bf4e633", //default userid
+    DefaultStatsType = "kd", //kd top
+    DefaultStatsGroup = "squad", //solo duo squad
+    DefaultStatsTime = "weekly", //weekly alltime
+    DefaultStatsPlatform = "pc", //pc ps4 xb1
+    DefaultTwitchUsername = "TheKaotic13"; //default twitch username
 
-var StatsUsername = DefaultStatsUsername; //default username
-var StatsUserId = DefaultStatsUserId; //default userid
-var StatsType = DefaultStatsType; //kd top
-var StatsGroup = DefaultStatsGroup; //solo duo squad
-var StatsTime = DefaultStatsTime; //weekly alltime
-var StatsPlatform = DefaultStatsPlatform; //pc ps4 xb1
-var TwitchUsername = DefaultTwitchUsername; //default twitch username
-var SendReturn = "";
+var StatsUsername = DefaultStatsUsername, //default username
+    StatsUserId = DefaultStatsUserId, //default userid
+    StatsType = DefaultStatsType, //kd top
+    StatsGroup = DefaultStatsGroup, //solo duo squad
+    StatsTime = DefaultStatsTime, //weekly alltime
+    StatsPlatform = DefaultStatsPlatform, //pc ps4 xb1
+    TwitchUsername = DefaultTwitchUsername, //default twitch username
+    SendReturn = "";
 
 app.use(require('helmet')()); //Secure SSL with HTLS
 
@@ -43,8 +43,8 @@ app.get('/', function (req, res) {
 
 app.get('/get_user_id', function (req, res) {
     //Set default settings every session
-    let UserName = DefaultStatsUsername;
-    let Platform = DefaultStatsPlatform;
+    let UserName = DefaultStatsUsername,
+        Platform = DefaultStatsPlatform;
 
     //Check if have get requests
     if(req.query.username){ UserName = req.query.username; } //If get username
@@ -103,11 +103,11 @@ app.get('/api/fortnite', function (req, res) {
 });
 
 function GetStatsFromId(res){
-    let Wins = "";
-    let WinsRate = "";
-    let Kda = "";
-    let Match = "";
-    let Kill = "";
+    let Wins = "",
+        WinsRate = "",
+        Kda = "",
+        Match = "",
+        Kill = "";
 
     fortniteAPI.getStatsBRFromID(StatsUserId, StatsPlatform, StatsTime).then(stats => {
         if(StatsGroup.includes("solo") || StatsGroup.includes("duo") || StatsGroup.includes("squad")){
@@ -135,9 +135,9 @@ function GetStatsFromId(res){
 }
 
 function TypeToString(mode, wins, winsrate, kda, match, kill){
-    let TypeReturn = "";
-    let TimeSt = "";
-    let GroupSt = "";
+    let TypeReturn = "",
+        TimeSt = "",
+        GroupSt = "";
 
     if(StatsTime.includes("alltime")){
         TimeSt = "in all seasons.";
